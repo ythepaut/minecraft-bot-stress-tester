@@ -99,6 +99,7 @@ function main(): void {
         setTimeout(() => {
             console.info("Bot " + (i+1) + "/" + args.n + " is connecting...");
             bots.push(connectBot(credentials[j], server));
+            credentials.splice(j, 1);
         }, args.d * i);
     }
 
