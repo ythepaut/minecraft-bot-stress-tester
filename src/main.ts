@@ -95,8 +95,8 @@ function main(): void {
 
     let bots: Bot[] = [];
     for (let i = 0 ; i < args.n ; ++i) {
-        const j = Math.floor(Math.random()* credentials.length);
         setTimeout(() => {
+            const j = Math.floor(Math.random() * credentials.length);
             console.info("Bot " + (i+1) + "/" + args.n + " is connecting...");
             bots.push(connectBot(credentials[j], server));
             credentials.splice(j, 1);
