@@ -1,0 +1,23 @@
+{
+  "name": "mc-bot-stress-test",
+  "version": "1.0.0",
+  "description": "Minecraft bot stress tester",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx ts-node src/main.ts"
+  },
+  "author": "Yohann THEPAUT <contact@ythepaut.com> (ythepaut)",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@types/minimist": "^1.2.2",
+    "fs": "^0.0.1-security",
+    "mineflayer": "^3.9.0",
+    "minimist": "^1.2.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.2"
+  }
+}
