@@ -42,7 +42,9 @@ function loadCredentials(path: string): credential[] {
  * @param {credential}      credential      Minecraft credentials
  * @param {server}          server          Server details
  */
-function connectBot(credential: credential, server: server): Bot {
+function connectBot(credential: credential, server: server): Bot | null {
+    if (!credential.email || !credential.passwd)
+        return null;
     return createBot({
         host: server.host,
         port: server.port,
@@ -96,17 +98,23 @@ function main(): void {
     let bots: Bot[] = [];
     for (let i = 0 ; i < args.n ; ++i) {
         setTimeout(() => {
+
+            console.info("Bot " + (i + 1) + "/" + args.n + " is connecting...");
+
             const j = Math.floor(Math.random() * credentials.length);
-            console.info("Bot " + (i+1) + "/" + args.n + " is connecting...");
-            bots.push(connectBot(credentials[j], server));
+            const credential = credentials[j];
             credentials.splice(j, 1);
+
+            const bot = connectBot(credential, server);
+            if (bot !== null) {
+                bots.push(bot);
+                bot.on("kicked", () => {
+                    console.log("Bot " + i + " got kicked.");
+                });
+            }
+
         }, args.d * i);
     }
-
-    bots.forEach((bot) => {
-        bot.on("kicked", console.log);
-        bot.on("error", console.log);
-    });
 }
 
 main();
